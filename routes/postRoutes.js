@@ -9,12 +9,9 @@ const validator = require('express-joi-validation').createValidator({});
 const postSchema = Joi.object({
   // title: Joi.string().required().min(15).max(40),
   // detail: Joi.string().required().min(150).max(1000),
-  // title: Joi.string().required(),
-  // detail: Joi.string().required(),
-  image: Joi.optional().custom((req, hel) => {
-    console.log(req);
-  }),
-  // public_id: Joi.string().required(),
+  title: Joi.string().required(),
+  detail: Joi.string().required(),
+  image: Joi.optional(),
 });
 
 
@@ -25,7 +22,7 @@ const noAllow = (req, res) => res.status(405).json({
 
 router.get('/', postController.getAllPosts);
 
-router.route('/api/createPost').post(auth.checkAuth, postController.createPost).all(noAllow);
+router.route('/api/createPost').post(auth.checkAuth, validator.body(postSchema), postController.createPost).all(noAllow);
 router.patch('/api/update/post/:id', auth.checkAuth, postController.updatePost);
 router.get('/api/getPostUser', auth.checkAuth, postController.getPostByUser);
 router.delete('/api/remove/post/:id', auth.checkAuth, postController.removePost);

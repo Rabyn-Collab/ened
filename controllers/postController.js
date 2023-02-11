@@ -1,6 +1,8 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const path = require('path');
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
 const posts = [
   { id: 1, title: 'hello', detail: 'something' }
@@ -23,16 +25,10 @@ module.exports.createPost = async (req, res) => {
   try {
 
 
-    if (!req.files) {
+    if (!req.files || !req.files.image) {
       return res.status(400).json({
         status: 401,
-        message: 'image file is required'
-      });
-    }
-    if (!req.files.image) {
-      return res.status(400).json({
-        status: 401,
-        message: 'image feild is required'
+        message: 'image is required'
       });
     }
 
@@ -48,14 +44,25 @@ module.exports.createPost = async (req, res) => {
         message: 'please provide valid email'
       });
     }
+    const filePath = `./uploads/${file.name}`;
 
-    await file.mv(`./uploads/images/${file.name}`, (err) => {
+    file.mv(filePath, (err) => {
 
     })
 
+    // cloudinary.config({
+    //   cloud_name: 'dx5eyrlaf',
+    //   api_key: '316226597746222',
+    //   api_secret: 'YbnHayJ00pMZjzCnVFrois70iKc'
+    // });
+
+    // const result = await cloudinary.uploader.upload(`./uploads/${file.name}`, { upload_preset: "sample_pics" });
+    // fs.unlink(filePath, err => {
+    //   console.log(err);
+    // });
+
 
     return res.status(200).json({ message: 'hello' });
-
 
     // const user = await User.findOne({ _id: userId });
 

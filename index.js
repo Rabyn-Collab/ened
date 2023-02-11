@@ -24,7 +24,6 @@ app.use(fileUpload({
   abortOnLimit: true,
   createParentPath: true
 }))
-app.use('/uploads/images', express.static(path.join('uploads', 'images',)));
 
 app.use(userRoutes);
 app.use(postRoutes);

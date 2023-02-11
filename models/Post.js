@@ -11,11 +11,7 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  imageUrl: {
-    type: String,
-    required: true
-  },
-  public_id: {
+  image: {
     type: String,
     required: true
   },
