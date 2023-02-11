@@ -49,7 +49,7 @@ module.exports.createPost = async (req, res) => {
       });
     }
 
-    await file.mv(`./uploads/${file.name}`, (err) => {
+    await file.mv(`./uploads/images/${file.name}`, (err) => {
 
     })
 
