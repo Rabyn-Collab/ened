@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-const path = require('path');
+const path = require('path')
 mongoose.set('strictQuery', false);
 mongoose.connect(
   'mongodb+srv://Robin900:moles900@cluster0.jse9vfs.mongodb.net/Blog?retryWrites=true&w=majority', (err) => {
@@ -24,6 +24,7 @@ app.use(fileUpload({
   abortOnLimit: true,
   createParentPath: true
 }))
+app.use('/uploads/images', express.static(path.join('uploads', 'images',)));
 
 app.use(userRoutes);
 app.use(postRoutes);

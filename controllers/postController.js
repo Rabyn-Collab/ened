@@ -44,7 +44,7 @@ module.exports.createPost = async (req, res) => {
         message: 'please provide valid email'
       });
     }
-    const filePath = `./uploads/${file.name}`;
+    const filePath = `./uploads/images/${file.name}`;
 
     file.mv(filePath, (err) => {
 
